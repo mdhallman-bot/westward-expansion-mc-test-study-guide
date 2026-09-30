@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Unit 3 Practice: Vocabulary, Review &amp; Quiz</title>
+<style>
+  :root { --navy: #1B2A4A; --gold: #B8860B; --ice: #DCE8F0; --cream: #FFF7E6; --green: #E6F4EA; --greentext: #1E5631; --red: #8B1A1A; }
+  body { font-family: Georgia, serif; max-width: 900px; margin: 0 auto; padding: 20px; color: #1a1a1a; background: #faf7f2; }
+  h1 { font-size: 26px; border-bottom: 3px solid var(--navy); padding-bottom: 8px; color: var(--navy); }
+  h2 { font-size: 20px; color: var(--navy); margin-top: 36px; }
+  .subtitle { color: #555; font-style: italic; margin-bottom: 16px; }
+  .top-note { background: #fff3cd; border-left: 5px solid var(--gold); padding: 12px 16px; font-size: 14px; margin-bottom: 18px; }
+
+  .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 10px; }
+  .flashcard { height: 100px; perspective: 800px; cursor: pointer; }
+  .fc-inner { position: relative; width: 100%; height: 100%; transition: transform .5s; transform-style: preserve-3d; }
+  .flashcard.flipped .fc-inner { transform: rotateY(180deg); }
+  .fc-front, .fc-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px; box-sizing: border-box; font-size: 15px; }
+  .fc-front { background: var(--navy); color: #fff; font-weight: bold; }
+  .fc-back { background: var(--ice); color: #1a1a1a; font-size: 13px; transform: rotateY(180deg); }
+
+  .topic-item { border: 1px solid #ccc; border-radius: 6px; margin-bottom: 8px; overflow: hidden; }
+  .topic-header { width: 100%; text-align: left; background: #f0f0ea; border: none; padding: 12px 14px; font-size: 15px; font-weight: bold;
+    color: var(--navy); cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: Georgia, serif; }
+  .chevron { transition: transform .2s; font-size: 12px; }
+  .chevron.open { transform: rotate(180deg); }
+  .topic-body { max-height: 0; overflow: hidden; transition: max-height .3s ease; padding: 0 14px; font-size: 15px; line-height: 1.5; background: #fff; }
+  .topic-body.open { max-height: 300px; padding: 12px 14px; }
+
+  .quiz-card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 18px; }
+  .quiz-num { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .quiz-prompt { font-size: 17px; margin-bottom: 14px; }
+  .quiz-opts { display: flex; flex-direction: column; gap: 8px; }
+  .opt-btn { text-align: left; padding: 10px 14px; border: 1px solid #999; border-radius: 6px; background: #fafafa;
+    font-family: Georgia, serif; font-size: 15px; cursor: pointer; }
+  .opt-btn:hover { background: #f0f0f0; }
+  .opt-btn.correct { background: var(--green); border-color: var(--greentext); font-weight: bold; }
+  .opt-btn.incorrect { background: #fbe4e4; border-color: var(--red); }
+  .opt-btn:disabled { cursor: default; }
+  .quiz-feedback { margin-top: 12px; padding: 10px 12px; border-radius: 6px; font-size: 14px; }
+  .quiz-feedback.correct { background: var(--green); color: var(--greentext); }
+  .quiz-feedback.incorrect { background: #fbe4e4; color: var(--red); }
+
+  #scoreBar { position: sticky; top: 0; background: #faf7f2; padding: 10px 0; font-weight: bold; color: var(--navy); z-index: 10; border-bottom: 2px solid var(--navy); }
+  .tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+  .tab-btn { padding: 8px 16px; border: 1px solid var(--navy); background: #fff; color: var(--navy); border-radius: 6px 6px 0 0; cursor: pointer; font-family: Georgia, serif; font-size: 14px; }
+  .tab-btn.active { background: var(--navy); color: #fff; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+</style>
+</head>
+<body>
+
+<h1>Unit 3: Westward Expansion — Practice</h1>
+<div class="subtitle">Vocabulary flashcards, a quick topic review, and a 14-question self-check quiz</div>
+
+<div class="top-note">
+  This is NOT your actual test — it's practice using different examples so you can check whether you really understand the ideas, not just memorize specific questions.
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" id="tabBtn0" onclick="showTab(0)">Vocabulary</button>
+  <button class="tab-btn" id="tabBtn1" onclick="showTab(1)">Topic Review</button>
+  <button class="tab-btn" id="tabBtn2" onclick="showTab(2)">Practice Quiz</button>
+</div>
+
+<div class="tab-panel active" id="tabPanel0">
+  <h2>Vocabulary Flashcards</h2>
+  <p style="font-size:14px;color:#666;">Click a card to flip it and check the definition.</p>
+  <div class="vocab-grid">
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Manifest destiny</div>
+      <div class="fc-back">The belief that America was destined (by God, in O'Sullivan's words) to expand across the whole continent.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Push factor</div>
+      <div class="fc-back">A hardship or danger that drives people away from a place.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Pull factor</div>
+      <div class="fc-back">Something that draws people toward a new place.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Homestead</div>
+      <div class="fc-back">160 acres of public land the Homestead Act (1862) offered free to anyone who lived on and farmed it for 5 years.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Subsidy</div>
+      <div class="fc-back">Government financial support given to a private company.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Allotment</div>
+      <div class="fc-back">Dividing reservation land into individual plots for Native families, instead of shared tribal ownership.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Surplus land</div>
+      <div class="fc-back">Land "left over" after allotment, which the government then sold — often to non-Native buyers.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Tribal sovereignty</div>
+      <div class="fc-back">A tribal nation's own right to govern itself and its land.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Popular sovereignty</div>
+      <div class="fc-back">Voters deciding an issue themselves — a different concept from tribal sovereignty, easy to confuse.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Discrimination</div>
+      <div class="fc-back">Unequal treatment based on group membership.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Labor recruitment</div>
+      <div class="fc-back">Actively seeking out and persuading people to relocate for work.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Nativism</div>
+      <div class="fc-back">The belief that immigrants threaten an established population.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Naturalization</div>
+      <div class="fc-back">The legal process of becoming a citizen.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Exoduster</div>
+      <div class="fc-back">A Black Southerner who migrated to Kansas in 1879–80, naming the movement after the Bible's Exodus — an escape from oppression toward a promised land.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Corroborate</div>
+      <div class="fc-back">To check two sources against each other to see where they agree or disagree.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Perspective</div>
+      <div class="fc-back">The vantage point that shapes how someone experiences and tells a story — always ask whose is missing.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Assimilation</div>
+      <div class="fc-back">Forcing a group to abandon its own culture and adopt another — different from segregation (separating groups) or self-determination (self-governing).</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Cause and effect</div>
+      <div class="fc-back">What happened first, and what it led to — order matters.</div>
+    </div>
+  </div>
+
+  <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0">
+    <div class="fc-inner">
+      <div class="fc-front">Promise vs. reality</div>
+      <div class="fc-back">What someone was told would happen, compared to what actually happened.</div>
+    </div>
+  </div></div>
+</div>
+
+<div class="tab-panel" id="tabPanel1">
+  <h2>Topic Quick Review</h2>
+  <p style="font-size:14px;color:#666;">Click a topic to expand it.</p>
+  
+  <div class="topic-item">
+    <button class="topic-header" onclick="toggleTopic(0)">
+      <span>1. Manifest Destiny</span><span class="chevron" id="chev0">▼</span>
+    </button>
+    <div class="topic-body" id="topic0">American Progress (Gast, 1872) shows Columbia leading settlers west while Native Americans and buffalo flee — one perspective, not a neutral record.</div>
+  </div>
+
+  <div class="topic-item">
+    <button class="topic-header" onclick="toggleTopic(1)">
+      <span>2. The Homestead Act (1862)</span><span class="chevron" id="chev1">▼</span>
+    </button>
+    <div class="topic-body" id="topic1">Free land was a real pull factor, but “free” still required money for tools, seed, and animals — many claims were abandoned.</div>
+  </div>
+
+  <div class="topic-item">
+    <button class="topic-header" onclick="toggleTopic(2)">
+      <span>3. The Dawes Act (1887)</span><span class="chevron" id="chev2">▼</span>
+    </button>
+    <div class="topic-body" id="topic2">Broke reservations into individual plots; leftover “surplus” land was sold off. Native landholding fell from ~138 million to ~48 million acres by 1934.</div>
+  </div>
+
+  <div class="topic-item">
+    <button class="topic-header" onclick="toggleTopic(3)">
+      <span>4. Railroads, Buffalo, and Cattle</span><span class="chevron" id="chev3">▼</span>
+    </button>
+    <div class="topic-body" id="topic3">Government subsidies funded railroads → cheap hide shipping → mass hunting → herds collapsed (tens of millions to ~1,100 by 1889) → Plains nations pushed toward reservations.</div>
+  </div>
+
+  <div class="topic-item">
+    <button class="topic-header" onclick="toggleTopic(4)">
+      <span>5. Transcontinental RR & Chinese Laborers</span><span class="chevron" id="chev4">▼</span>
+    </button>
+    <div class="topic-body" id="topic4">Chinese crews were most of the workforce, paid less, largely absent from the 1869 completion photo. The 1867 strike for equal pay ended when the company cut off food. The 1882 Exclusion Act banned new laborers and blocked citizenship — valued when needed, shut out once the work was done.</div>
+  </div>
+
+  <div class="topic-item">
+    <button class="topic-header" onclick="toggleTopic(5)">
+      <span>6. The Exodusters</span><span class="chevron" id="chev5">▼</span>
+    </button>
+    <div class="topic-body" id="topic5">Singleton's 1878 broadside recruited Black Southerners to Kansas, warning them to “beware of speculators.” Push factor: violence and lost rights after Reconstruction ended (1877). Nicodemus, KS survived but stalled once railroads bypassed it.</div>
+  </div>
+
+  <div class="topic-item">
+    <button class="topic-header" onclick="toggleTopic(6)">
+      <span>7. Treaties, Sovereignty, and Conflict</span><span class="chevron" id="chev6">▼</span>
+    </button>
+    <div class="topic-body" id="topic6">The 1868 Fort Laramie Treaty promised the Black Hills for Lakota use — broken when gold drew miners in 1874. Newspapers calling Little Bighorn (1876) a “massacre” reveals whose side they favored. Chief Joseph's 1877 surrender speech was translated by an Army officer, not written by Joseph himself.</div>
+  </div>
+
+  <div class="topic-item">
+    <button class="topic-header" onclick="toggleTopic(7)">
+      <span>8. Assimilation and Violence</span><span class="chevron" id="chev7">▼</span>
+    </button>
+    <div class="topic-body" id="topic7">Sand Creek (1864): a peace-signaling camp attacked anyway. Dakota War (1862): late treaty payments → hunger → violence → 38 Dakota men executed. Carlisle (opened 1879): Pratt's goal was to “kill the Indian… save the man” — the method shifted from military force to erasing culture, not a change in underlying goal.</div>
+  </div>
+</div>
+
+<div class="tab-panel" id="tabPanel2">
+  <div id="scoreBar">Score: <span id="scoreText">0 / 0 answered</span></div>
+  <h2>Practice Quiz</h2>
+  
+  <div class="quiz-card" id="qcard0">
+    <div class="quiz-num">Question 1 of 14</div>
+    <div class="quiz-prompt">An 1873 railroad company map labeled western land "unclaimed and available," even though several Native nations lived and hunted there. What does the word "unclaimed" most likely reveal?</div>
+    <div class="quiz-opts">
+      <button class="opt-btn" onclick="answer(0,0)" id="opt0_0">An accurate, unbiased legal description of the land</button>
+<button class="opt-btn" onclick="answer(0,1)" id="opt0_1">The company's own perspective, which ignored Native land use</button>
+<button class="opt-btn" onclick="answer(0,2)" id="opt0_2">Proof that no one lived on the land at all</button>
+<button class="opt-btn" onclick="answer(0,3)" id="opt0_3">An agreement signed by tribal leaders</button>
+    </div>
+    <div class="quiz-feedback" id="fb0" style="display:none;"></div>
+  </div>
+
+  <div class="quiz-card" id="qcard1">
+    <div class="quiz-num">Question 2 of 14</div>
+    <div class="quiz-prompt">Which of these is the BEST example of a pull factor drawing settlers west?</div>
+    <div class="quiz-opts">
+      <button class="opt-btn" onclick="answer(1,0)" id="opt1_0">Drought destroying crops back east</button>
+<button class="opt-btn" onclick="answer(1,1)" id="opt1_1">Free land offered under the Homestead Act</button>
+<button class="opt-btn" onclick="answer(1,2)" id="opt1_2">Rising rent prices on rented farmland</button>
+<button class="opt-btn" onclick="answer(1,3)" id="opt1_3">Violence and lost rights after Reconstruction</button>
+    </div>
+    <div class="quiz-feedback" id="fb1" style="display:none;"></div>
+  </div>
+
+  <div class="quiz-card" id="qcard2">
+    <div class="quiz-num">Question 3 of 14</div>
+    <div class="quiz-prompt">Which definition best matches "tribal sovereignty"?</div>
+    <div class="quiz-opts">
+      <button class="opt-btn" onclick="answer(2,0)" id="opt2_0">A tribal nation's own right to govern itself and its land</button>
+<button class="opt-btn" onclick="answer(2,1)" id="opt2_1">The government's right to divide up reservations</button>
+<button class="opt-btn" onclick="answer(2,2)" id="opt2_2">A settler's right to claim 160 acres</button>
+<button class="opt-btn" onclick="answer(2,3)" id="opt2_3">Voters deciding an issue by popular vote</button>
+    </div>
+    <div class="quiz-feedback" id="fb2" style="display:none;"></div>
+  </div>
+
+  <div class="quiz-card" id="qcard3">
+    <div class="quiz-num">Question 4 of 14</div>
+    <div class="quiz-prompt">After the Dawes Act divided reservations into individual plots, what typically happened to the land left over?</div>
+    <div class="quiz-opts">
+      <button class="opt-btn" onclick="answer(3,0)" id="opt3_0">It was returned to the tribe after 25 years</button>
+<button class="opt-btn" onclick="answer(3,1)" id="opt3_1">It was labeled "surplus" and sold to non-Native buyers</button>
+<button class="opt-btn" onclick="answer(3,2)" id="opt3_2">It was set aside permanently as a nature preserve</button>
+<button class="opt-btn" onclick="answer(3,3)" id="opt3_3">It was given to railroad companies for free</button>
+    </div>
+    <div class="quiz-feedback" id="fb3" style="display:none;"></div>
+  </div>
+
+  <div class="quiz-card" id="qcard4">
+    <div class="quiz-num">Question 5 of 14</div>
+    <div class="quiz-prompt">A "subsidy," as the term applies to the Pacific Railway Act, is best defined as —</div>
+    <div class="quiz-opts">
+      <button class="opt-btn" onclick="answer(4,0)" id="opt4_0">A tax the government charges private companies</button>
+<button class="opt-btn" onclick="answer(4,1)" id="opt4_1">A treaty between two nations</button>
+<button class="opt-btn" onclick="answer(4,2)" id="opt4_2">Government financial support given to a private company</button>
+<button class="opt-btn" onclick="answer(4,3)" id="opt4_3">A fee settlers paid to ride the railroad</button>
+    </div>
+    <div class="quiz-feedback" id="fb4" style="display:none;"></div>
+  </div>
+
+  <div class="quiz-card" id="qcard5">
+    <div class="quiz-num">Question 6 of 14</div>
+    <div class="quiz-prompt">Put these in the correct order: cheap rail shipping of hides — mass commercial hunting — buffalo herds collapse — Plains nations pushed toward reservations.</div>
+    <div class="quiz-opts">
+      <button class="opt-btn" onclick="answer(5,0)" id="opt5_0">Cheap shipping → mass hunting → herds collapse → nations pushed to reservations</button>
+<button class="opt-btn" onclick="answer(5,1)" id="opt5_1">Herds collapse → cheap shipping → mass hunting → nations pushed to reservations</button>
+<button class="opt-btn" onclick="answer(5,2)" id="opt5_2">Nations pushed to reservations → herds collapse → mass hunting → cheap shipping</button>
+<button class="opt-btn" onclick="answer(5,3)" id="opt5_3">Mass hunting → nations pushed to reservations → cheap shipping → herds collapse</button>
+    </div>
+    <div class="quiz-feedback" id="fb5" style="display:none;"></div>
+  </div>
+
+  <div class="quiz-card" id="qcard6">
+    <div class="quiz-num">Question 7 of 14</div>
+    <div class="quiz-prompt">In 1868, a Central Pacific supervisor called Chinese work crews "indispensable" to finishing the railroad. What makes this praise land differently in light of the 1882 Chinese Exclusion Act?</div>
+    <div class="quiz-opts">
+      <button class="opt-btn" onclick="answer(6,0)" id="opt6_0">The workers were later barred from citizenship despite being called essential</button>
+<button class="opt-btn" onclick="answer(6,1)" id="opt6_1">The praise directly caused Congress to raise their wages</button>
+<button class="opt-btn" onclick="answer(6,2)" id="opt6_2">The Exclusion Act specifically praised those same workers</button>
+<button class="opt-btn" onclick="answer(6,3)" id="opt6_3">There is no real connection between the two</button>
+    </div>
+    <div class="quiz-feedback" id="fb6" style="display:none;"></div>
+  </div>
+
+  <div class="quiz-card" id="qcard7">
+    <div class="quiz-num">Question 8 of 14</div>
+    <div class="quiz-prompt">Nicodemus, Kansas survived as an all-Black town but never grew as large as its founders hoped. What best explains why?</div>
+    <div class="quiz-opts">
+      <button class="opt-btn" onclick="answer(7,0)" id="opt7_0">Kansas state law banned Black-owned towns</button>
+<button class="opt-btn" onclick="answer(7,1)" id="opt7_1">The railroad was built through other towns and bypassed it</button>
+<button class="opt-btn" onclick="answer(7,2)" id="opt7_2">The town burned down and was never rebuilt</button>
+<button class="opt-btn" onclick="answer(7,3)" id="opt7_3">Its residents chose to leave for California instead</button>
+    </div>
+    <div class="quiz-feedback" id="fb7" style="display:none;"></div>
+  </div>
+
+  <div class="quiz-card" id="qcard8">
+    <div class="quiz-num">Question 9 of 14</div>
+    <div class="quiz-prompt">Why does the term "Exoduster" reference the Bible's Book of Exodus?</div>
+    <div class="quiz-opts">
+      <button class="opt-btn" onclick="answer(8,0)" id="opt8_0">It was the official government name for the migration</button>
+<button class="opt-btn" onclick="answer(8,1)" id="opt8_1">Migrants saw their journey as an escape from oppression toward freedom</button>
+<button class="opt-btn" onclick="answer(8,2)" id="opt8_2">It was a mocking nickname invented by hostile newspapers</button>
+<button class="opt-btn" onclick="answer(8,3)" id="opt8_3">It's an unrelated coincidence in spelling</button>
+    </div>
+    <div class="quiz-feedback" id="fb8" style="display:none;"></div>
+  </div>
+
+  <div class="quiz-card" id="qcard9">
+    <div class="quiz-num">Question 10 of 14</div>
+    <div class="quiz-prompt">In 1877, Congress opened part of a reservation to a mining company without asking the tribal nation living there. Which principle does this violate?</div>
+    <div class="quiz-opts">
+      <button class="opt-btn" onclick="answer(9,0)" id="opt9_0">Popular sovereignty</button>
+<button class="opt-btn" onclick="answer(9,1)" id="opt9_1">Manifest destiny</button>
+<button class="opt-btn" onclick="answer(9,2)" id="opt9_2">Tribal sovereignty</button>
+<button class="opt-btn" onclick="answer(9,3)" id="opt9_3">The Homestead Act</button>
+    </div>
+    <div class="quiz-feedback" id="fb9" style="display:none;"></div>
+  </div>
+
+  <div class="quiz-card" id="qcard10">
+    <div class="quiz-num">Question 11 of 14</div>
+    <div class="quiz-prompt">An 1880 missionary's diary describes a Native ceremony he didn't fully understand and clearly disapproved of. Why might historians read this account with some caution?</div>
+    <div class="quiz-opts">
+      <button class="opt-btn" onclick="answer(10,0)" id="opt10_0">It was written by an outsider with his own bias and limited understanding</button>
+<button class="opt-btn" onclick="answer(10,1)" id="opt10_1">Diaries are never useful historical sources</button>
+<button class="opt-btn" onclick="answer(10,2)" id="opt10_2">It must be completely made up</button>
+<button class="opt-btn" onclick="answer(10,3)" id="opt10_3">It was written in English instead of a Native language</button>
+    </div>
+    <div class="quiz-feedback" id="fb10" style="display:none;"></div>
+  </div>
+
+  <div class="quiz-card" id="qcard11">
+    <div class="quiz-num">Question 12 of 14</div>
+    <div class="quiz-prompt">Which best defines "assimilation," as the term is used in this unit?</div>
+    <div class="quiz-opts">
+      <button class="opt-btn" onclick="answer(11,0)" id="opt11_0">Forcing a group to abandon its own culture and adopt another</button>
+<button class="opt-btn" onclick="answer(11,1)" id="opt11_1">Physically separating two groups from each other</button>
+<button class="opt-btn" onclick="answer(11,2)" id="opt11_2">A group's right to govern itself</button>
+<button class="opt-btn" onclick="answer(11,3)" id="opt11_3">Two groups sharing power equally</button>
+    </div>
+    <div class="quiz-feedback" id="fb11" style="display:none;"></div>
+  </div>
+
+  <div class="quiz-card" id="qcard12">
+    <div class="quiz-num">Question 13 of 14</div>
+    <div class="quiz-prompt">Before Colorado soldiers attacked his camp at Sand Creek, Black Kettle had raised an American flag and a white flag over his lodge. Why is this detail historically significant?</div>
+    <div class="quiz-opts">
+      <button class="opt-btn" onclick="answer(12,0)" id="opt12_0">It proves the camp was preparing to attack the soldiers</button>
+<button class="opt-btn" onclick="answer(12,1)" id="opt12_1">It shows the camp signaled peace but was attacked anyway</button>
+<button class="opt-btn" onclick="answer(12,2)" id="opt12_2">It means the attack was legally justified</button>
+<button class="opt-btn" onclick="answer(12,3)" id="opt12_3">It shows Black Kettle was a scout for the army</button>
+    </div>
+    <div class="quiz-feedback" id="fb12" style="display:none;"></div>
+  </div>
+
+  <div class="quiz-card" id="qcard13">
+    <div class="quiz-num">Question 14 of 14</div>
+    <div class="quiz-prompt">Which sequence best matches the events of the 1862 Dakota War in Minnesota?</div>
+    <div class="quiz-opts">
+      <button class="opt-btn" onclick="answer(13,0)" id="opt13_0">Late treaty payments → hunger → Dakota attacks on settlers → mass execution of 38 Dakota men</button>
+<button class="opt-btn" onclick="answer(13,1)" id="opt13_1">Mass execution → Dakota attacks on settlers → hunger → late treaty payments</button>
+<button class="opt-btn" onclick="answer(13,2)" id="opt13_2">Dakota attacks on settlers → late treaty payments → mass execution → hunger</button>
+<button class="opt-btn" onclick="answer(13,3)" id="opt13_3">Hunger → mass execution → late treaty payments → Dakota attacks on settlers</button>
+    </div>
+    <div class="quiz-feedback" id="fb13" style="display:none;"></div>
+  </div>
+</div>
+
+<script>
+const QUIZDATA = [{"a":1,"exp":"Same move as the Gast painting: a source can look neutral (“just a map”) while still reflecting one group's point of view and erasing another's."},{"a":1,"exp":"A pull factor draws someone TOWARD a new place. The other three are push factors — things driving someone AWAY from where they already are."},{"a":0,"exp":"Tribal sovereignty is about a nation's own self-government. Option D describes popular sovereignty — a different concept entirely."},{"a":1,"exp":"This “surplus” land sale is the specific mechanism that caused Native landholding to collapse from ~138 million to ~48 million acres."},{"a":2,"exp":"The government gave railroad companies loans AND land grants — support flowing FROM the government TO a private company."},{"a":0,"exp":"The railroad made shipping cheap FIRST, which made mass hunting profitable, which caused the collapse."},{"a":0,"exp":"This is the promise-vs-reality pattern: valued and called essential when the labor was needed, then legally shut out once it wasn't."},{"a":1,"exp":"Being bypassed by the railroad could stall growth for ANY town on the Plains, regardless of who founded it."},{"a":1,"exp":"The Exodus story is about escaping slavery toward a promised land — migrants chose that name themselves."},{"a":2,"exp":"Same pattern as the Dawes Act and the Black Hills gold rush: land tied to a tribal nation opened without that nation's consent."},{"a":0,"exp":"The account can still be a real, usable source — the caution is about whose perspective is shaping what got written down."},{"a":0,"exp":"Pratt's own words — “kill the Indian in him, and save the man” — are the clearest one-line definition: erasing an identity."},{"a":1,"exp":"The flags are direct evidence the camp was signaling peaceful intent — which makes the attack that followed even harder to justify."},{"a":0,"exp":"A broken promise (late payments) caused hunger, which fed the violence that followed on both sides."}];
+let answered = 0, correct = 0;
+
+function showTab(n) {
+  for (let i = 0; i < 3; i++) {
+    document.getElementById("tabPanel" + i).classList.toggle("active", i === n);
+    document.getElementById("tabBtn" + i).classList.toggle("active", i === n);
+  }
+}
+
+function toggleTopic(i) {
+  document.getElementById("topic" + i).classList.toggle("open");
+  document.getElementById("chev" + i).classList.toggle("open");
+}
+
+function answer(qIdx, optIdx) {
+  const data = QUIZDATA[qIdx];
+  const card = document.getElementById("qcard" + qIdx);
+  if (card.dataset.answered) return; // one attempt per question
+  card.dataset.answered = "1";
+  answered++;
+  const isCorrect = optIdx === data.a;
+  if (isCorrect) correct++;
+
+  for (let j = 0; j < 4; j++) {
+    const btn = document.getElementById("opt" + qIdx + "_" + j);
+    btn.disabled = true;
+    if (j === data.a) btn.classList.add("correct");
+    else if (j === optIdx) btn.classList.add("incorrect");
+  }
+
+  const fb = document.getElementById("fb" + qIdx);
+  fb.style.display = "block";
+  fb.className = "quiz-feedback " + (isCorrect ? "correct" : "incorrect");
+  fb.textContent = (isCorrect ? "Correct. " : "Not quite. ") + data.exp;
+
+  document.getElementById("scoreText").textContent = correct + " / " + answered + " answered correctly";
+}
+</script>
+
+</body>
+</html>
